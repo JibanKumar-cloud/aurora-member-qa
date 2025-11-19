@@ -1,4 +1,4 @@
-#Aurora Member Q&A Retrieval System
+# Aurora Member Q&A Retrieval System
 ### Semantic Search + OpenAI Reasoning (FAISS Persistent Index)
 ### 1) Install all dependencies
 
