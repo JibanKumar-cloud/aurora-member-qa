@@ -118,8 +118,12 @@ output:
 
 https://aurora-member-qa-api-1067461909384.us-central1.run.app/ask?q=Where%20is%20Fatima%20El%20Tahir%20dinner%20reservation%20and%20for%20how%20many%20people%3F&backend=semantic
 
-output:
+### output:
 {"answer":"Based on the messages, the best matching information is:\n\"Can you confirm my dinner reservation at The French Laundry for four people tonight?\"","reasoning":{"backend":"semantic","reasoning":"I ranked all messages by semantic similarity to the question and selected the top one as the most relevant."}}
+
+### sample browser image:
+<img width="1438" height="349" alt="Screenshot 2025-11-19 at 12 48 04 AM" src="https://github.com/user-attachments/assets/9834c444-ca4c-41b5-9660-71155fa8ebe5" />
+
 
 ALTERNATIVES:
 We can definately use fine tuned model as agent if we don't want to share our data to third party vendor like OpenAI.
