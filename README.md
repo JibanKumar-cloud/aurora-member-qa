@@ -1,16 +1,16 @@
-#### Aurora Member Q&A Retrieval System
-## Semantic Search + OpenAI Reasoning (FAISS Persistent Index)
-# 1) Install all dependencies
+#Aurora Member Q&A Retrieval System
+### Semantic Search + OpenAI Reasoning (FAISS Persistent Index)
+### 1) Install all dependencies
 
 Run the following command:
 pip install -r requirements.txt
 
-# 2) Running the API locally
+### 2) Running the API locally
 
 Start the API server:
 uvicorn app.main:app --reload
 
-# Before doing that, set your local environment variables:
+### Before doing that, set your local environment variables:
 
 export OPENAI_API_KEY="your-openai-key"
 export HF_TOKEN="your-huggingface-token"
@@ -27,7 +27,7 @@ If these files exist, the system loads them instantly.
 If not, it fetches messages from the MESSAGES_API_URL, builds embeddings with MiniLM, creates a FAISS index, and persists them.
 
 3) Core Files
-# a) retriever.py
+### a) retriever.py
 
 Handles:
 
@@ -38,26 +38,26 @@ Fetching raw messages
 Persisting index to disk
 
 
-# b) main.py
+### b) main.py
 
-# Contains the FastAPI server:
+### Contains the FastAPI server:
 
 /ask endpoint
-# Accepts two parameters :
+### Accepts two parameters :
 
 q → user question
 backend=openai → use OpenAI reasoning
 backend=semantic → only return retrieved messages
 By default: backend=openai
 
-# Pipeline:
+### Pipeline:
 Retrieve top-k messages via FAISS
 If backend=openai → send retrieved messages to the LLM
 Return final structured response
 
 
 ## Cloud Deployment
-# Deploy using:
+### Deploy using:
 
 gcloud run deploy aurora-member-qa-api \
   --source . \
@@ -69,22 +69,12 @@ gcloud run deploy aurora-member-qa-api \
   --set-secrets OPENAI_API_KEY=openai-api-key:latest,HF_TOKEN=huggingface-token:latest
 
 
-# Cloud Run will:
+### Cloud Run will:
 
 Load the FAISS index from the container
 Never call HuggingFace unless rebuilding
 Never call the /messages API unless index missing
 
-### Running Locally:
-## Testing the API
-
-# Example:
-curl "http://127.0.0.1:8000/ask?q=When%20is%20Sophia%20Al-Farsi%20going%20to%20Paris%3F&backend=openai"
-
-
-or semantic search only:
-
-curl "http://127.0.0.1:8000/ask?q=Where%20does%20Layla%20Kawaguchi%20want%20to%20book%20a%20villa%3F&backend=semantic"
 
 ### Sample of data:
 {"total":3349,"items":[{"id":"b1e9bb83-18be-4b90-bbb8-83b7428e8e21","user_id":"cd3a350e-dbd2-408f-afa0-16a072f56d23","user_name":"Sophia Al-Farsi","timestamp":"2025-05-05T07:47:20.159073+00:00","message":"Please book a private jet to Paris for this Friday."},{"id":"609ba052-c9e7-49e6-8b62-061eb8785b63","user_id":"e35ed60a-5190-4a5f-b3cd-74ced7519b4a","user_name":"Fatima El-Tahir","timestamp":"2024-11-14T20:03:44.159235+00:00","message":"Can you confirm my dinner reservation at The French Laundry for four people tonight?"},{"id":"44be0607-a918-40fa-a122-b2435fe54f3e","user_id":"23103ae5-38a8-4d82-af82-e9942aa4aefb","user_name":"Armand Dupont","timestamp":"2025-03-09T02:25:23.159256+00:00","message":"I need two tickets to the opera in Milan this Saturday."}]}
@@ -134,7 +124,7 @@ output:
 ALTERNATIVES:
 We can definately use fine tuned model as agent if we don't want to share our data to third party vendor like OpenAI.
 
-#### Notes
+## Notes
 
 If FAISS index exists, no transformer model is downloaded.
 Memory in Cloud Run must be > 512 MB because MiniLM loads at startup.
