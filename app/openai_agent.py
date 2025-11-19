@@ -46,7 +46,7 @@ Instructions:
 - First, think through the messages and decide what they imply.
 - Then respond in JSON only with exactly these keys:
   - "answer": a short natural-language answer to the question
-  - "reasoning": 2-3 sentence explanation of how you used the messages, or
+  - "reasoning": 1-2 sentence explanation of how you used the messages, or
                  why you could not answer
 
 Your entire reply MUST be a valid JSON object, nothing else.
@@ -65,7 +65,7 @@ def _format_messages(results: List[Tuple[Message, str, float]]) -> str:
     lines = []
     for msg, _text, score in results:
         lines.append(
-            f"- id={msg.id} | user={msg.member_name or msg.member_id} | score={score:.3f}\n"
+            f"- user={msg.member_name} | score={score:.3f}\n"
             f"  message: {msg.text}"
         )
     return "\n".join(lines)

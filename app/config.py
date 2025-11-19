@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     # This will be overridden by .env if present
     messages_api_url: AnyHttpUrl = "http://localhost:9000/messages"
 
-    top_k: int = 5
+    top_k: int = 3
 
     # FAISS / persistence config
     faiss_index_path: str = str(DATA_DIR / "faiss.index")
